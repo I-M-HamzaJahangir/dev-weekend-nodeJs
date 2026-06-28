@@ -1,0 +1,16 @@
+{
+  "name": "rest-api-01",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.7.1",
+    "nodemon": "^3.1.14"
+  }
+}

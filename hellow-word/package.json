@@ -1,0 +1,13 @@
+{
+  "name": "hellow-word",
+  "version": "1.0.0",
+  "main": "helloWorld.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node helloWorld"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
