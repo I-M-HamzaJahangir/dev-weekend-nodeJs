@@ -111,4 +111,26 @@ const loginUser = async (req, res) => {
 }
 
 
-module.exports = { createUser, loginUser }
+const logoutUser = (req, res) => {
+    res.clearCookie("app_acces_token", {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax"
+    })
+    return res.status(200).json({ msg: "Logged out successfully" })
+}
+
+const getMe = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select("-password")
+        if (!user) {
+            return res.status(404).json({ msg: "User Not Found" })
+        }
+        return res.status(200).json({ data: user })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ msg: "Server Error" })
+    }
+}
+
+module.exports = { createUser, loginUser, logoutUser, getMe }

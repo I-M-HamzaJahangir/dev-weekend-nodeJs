@@ -1,7 +1,6 @@
 const { verifyJWTToken } = require("../utils/helper")
 
 const authMiddleware = (req, res, next) => {
-    console.log(req)
     try {
         const token = req.cookies.access_token
 
@@ -20,6 +19,6 @@ const authMiddleware = (req, res, next) => {
         })
     }
 }
-
+ 
 
 module.exports = authMiddleware

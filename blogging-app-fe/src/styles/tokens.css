@@ -1,0 +1,58 @@
+:root {
+  /* surfaces */
+  --paper: #fbf9f4;
+  --paper-raised: #ffffff;
+  --paper-sunken: #f1ece1;
+  --border: #e3ddcd;
+  --border-strong: #d3caae;
+
+  /* text */
+  --ink: #22201b;
+  --ink-soft: #5b5648;
+  --ink-faint: #8c8672;
+
+  /* accent (burnt sienna) */
+  --accent: #b1441e;
+  --accent-hover: #94381a;
+  --accent-soft: #f3e3d8;
+  --accent-ink: #fff8f3;
+
+  /* status */
+  --danger: #a23324;
+  --danger-soft: #f5e1dc;
+  --success: #3f6b4a;
+
+  /* focus */
+  --focus-ring: rgba(177, 68, 30, 0.32);
+
+  /* type */
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Inter", ui-sans-serif, -apple-system, "Segoe UI", sans-serif;
+
+  /* spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* shape */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+
+  /* layout */
+  --content-width: 1120px;
+  --reading-width: 700px;
+
+  /* shadow (warm-tinted, not neutral gray) */
+  --shadow-sm: 0 1px 2px rgba(34, 32, 27, 0.05);
+  --shadow-md: 0 6px 20px rgba(34, 32, 27, 0.07);
+  --shadow-lg: 0 16px 40px rgba(34, 32, 27, 0.12);
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}

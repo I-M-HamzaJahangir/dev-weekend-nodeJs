@@ -1,15 +1,51 @@
-import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Home from "./pages/Home";
+import MyBlogs from "./pages/MyBlogs";
+import BlogDetail from "./pages/BlogDetail";
+import BlogEditor from "./pages/BlogEditor";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
     <>
-      <section id="center">
-        <h1>
-          This is the front end side of my blogging app i am currently working
-          on
-        </h1>
-        <h2>Coming Soon...</h2>
-      </section>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog/:id" element={<BlogDetail />} />
+        <Route
+          path="/my-blogs"
+          element={
+            <ProtectedRoute>
+              <MyBlogs />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/write"
+          element={
+            <ProtectedRoute>
+              <BlogEditor />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/blog/:id/edit"
+          element={
+            <ProtectedRoute>
+              <BlogEditor />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
     </>
   );
 }

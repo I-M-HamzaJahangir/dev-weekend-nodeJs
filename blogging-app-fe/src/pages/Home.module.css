@@ -1,0 +1,107 @@
+.hero {
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--paper-sunken), var(--paper));
+}
+
+.heroInner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--space-9) var(--space-5) var(--space-7);
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.heroTitle {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  max-width: 18ch;
+  margin: 0 auto var(--space-4);
+}
+
+.heroDesc {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  max-width: 46ch;
+  margin: 0 auto var(--space-6);
+  line-height: 1.6;
+}
+
+.searchForm {
+  max-width: 460px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  background: var(--paper-raised);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 1rem 0.7rem 2.6rem;
+  font-size: 0.95rem;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.main {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-5) var(--space-9);
+  width: 100%;
+  flex: 1;
+}
+
+.resultsHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.resultsCount {
+  font-size: 0.88rem;
+  color: var(--ink-faint);
+}
+
+.clearSearch {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.clearSearch:hover {
+  text-decoration: underline;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-5);
+}

@@ -1,0 +1,21 @@
+.footer {
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-9);
+}
+
+.inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+}
+
+.brand {
+  font-family: var(--font-display);
+  color: var(--ink-soft);
+}

@@ -1,0 +1,21 @@
+.wrap {
+  text-align: center;
+  padding: var(--space-9) var(--space-5);
+  color: var(--ink-soft);
+}
+
+.title {
+  font-size: 1.25rem;
+  color: var(--ink);
+  margin-bottom: var(--space-2);
+}
+
+.desc {
+  max-width: 40ch;
+  margin: 0 auto;
+  font-size: 0.95rem;
+}
+
+.action {
+  margin-top: var(--space-5);
+}
