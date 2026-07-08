@@ -19,11 +19,20 @@ const createUser = async (req, res) => {
     const { username, name, email, password } = data
 
     try {
-        const userExist = await User.findOne({ email })
-        if (userExist) {
-            return res.status(409).json({
-                msg: "Email Already Exist"
-            })
+        const existingUser = await User.findOne({
+            $or: [
+                { email },
+                { username }
+            ]
+        })
+        if (existingUser) {
+            if (existingUser.email === email) {
+                return res.status(409).json({ msg: "Email already exists" });
+            }
+
+            if (existingUser.username === username) {
+                return res.status(409).json({ msg: "Username already exists" });
+            }
         }
         const securePassword = await hashPassword(password)
         await User.create({
@@ -49,6 +58,7 @@ const createUser = async (req, res) => {
 
 
 const loginUser = async (req, res) => {
+
 
     const result = loginValidationSchema.safeParse(req.body)
     if (!result.success) {
