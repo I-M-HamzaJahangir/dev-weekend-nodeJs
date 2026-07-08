@@ -15,18 +15,16 @@ const verifyHash = async (attemptedPassword, hashPassword) => {
 }
 
 
-const JWT_SEC = "+oma9_CNj$9a%=eQaGSzpFWQT{Kc5XB9g,W@2$r:ZFe"
-
 const generateJWTToken = (user) => {
     const payoad = {
         id: user._id,
         email: user.email
     }
-    return jwt.sign(payoad, JWT_SEC, { expiresIn: "8h" })
+    return jwt.sign(payoad, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN })
 }
 
 const verifyJWTToken = (token) => {
-    return jwt.verify(token, JWT_SEC)
+    return jwt.verify(token, process.env.JWT_SECRET)
 }
 
 module.exports = { hashPassword, verifyHash, generateJWTToken, verifyJWTToken }

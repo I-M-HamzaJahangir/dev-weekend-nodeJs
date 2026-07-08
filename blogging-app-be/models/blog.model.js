@@ -16,7 +16,11 @@ const blogSchema = new mongoose.Schema({
     },
     coverImageUrl: {
         type: String,
+    },
+    coverImagePublicId : {
+        type:String
     }
+
 
 }, {
     timestamps: true

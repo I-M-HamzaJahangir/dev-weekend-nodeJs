@@ -1,4 +1,5 @@
 const Blog = require("../models/blog.model")
+const { uploadImage, deleteImage } = require("../utils/cloudinaryUtils")
 const { createBlogValidationSchema, updateBlogValidationSchema } = require("../validations/blog.validation")
 
 const createBlog = async (req, res) => {
@@ -15,14 +16,20 @@ const createBlog = async (req, res) => {
 
     const { title, content } = result.data
 
+
+    let image = null
+
+    if (req.file) {
+        image = await uploadImage(req.file.buffer)
+    }
+
     try {
         const blog = await Blog.create({
             title,
             content,
             author: req.user.id,
-            coverImageUrl: req.file
-                ? `/uploads/${req.file.filename}`
-                : null
+            coverImageUrl: image?.secure_url ?? null,
+            coverImagePublicId: image?.public_id ?? null
         })
         return res.status(201).json({
             msg: "Blog created successfully",
@@ -62,6 +69,58 @@ const getBlogs = async (req, res) => {
         const [totalDocuments, blogs] = await Promise.all([
             Blog.countDocuments(query),
             Blog.find(query)
+                .skip(skip)
+                .limit(limit)
+                .populate("author", "username name")
+        ]);
+        const totalPages = Math.ceil(totalDocuments / limit);
+        return res.status(200).json({
+            success: true,
+            data: blogs,
+            pagination: {
+                page,
+                limit,
+                totalDocuments,
+                totalPages,
+
+            }
+        });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            msg: "server error"
+        })
+    }
+}
+
+const getMyBlogs = async (req, res) => {
+    const { search } = req.query
+    let query = { author: req.user.id }
+
+    const page = Number(req.query.page) || 1
+    const limit = Number(req.query.limit) || 10
+
+    const skip = (page - 1) * limit
+    if (search) {
+        query = {
+            author: req.user.id,
+            $or: [
+                {
+                    title:
+                        { $regex: search, $options: "i" }
+                },
+                {
+                    content:
+                        { $regex: search, $options: "i" }
+                }
+            ]
+        }
+    }
+    try {
+        const [totalDocuments, blogs] = await Promise.all([
+            Blog.countDocuments(query),
+            Blog.find(query)
+                .sort({ createdAt: -1 })
                 .skip(skip)
                 .limit(limit)
                 .populate("author", "username name")
@@ -135,8 +194,17 @@ const updateBlog = async (req, res) => {
         }
 
         const update = { title, content }
+        let image = null
+
         if (req.file) {
-            update.coverImageUrl = `/uploads/${req.file.filename}`
+            image = await uploadImage(req.file.buffer)
+            if (blog.coverImagePublicId) {
+                await deleteImage(blog.coverImagePublicId);
+            }
+
+            update.coverImageUrl = image.secure_url
+            update.coverImagePublicId = image.public_id;
+
         }
 
         const newBlog = await Blog.findByIdAndUpdate(blogId, update, {
@@ -205,4 +273,4 @@ const deleteBlog = async (req, res) => {
 }
 
 
-module.exports = { createBlog, getBlogs, getBlog, updateBlog, deleteBlog }
+module.exports = { createBlog, getBlogs, getMyBlogs, getBlog, updateBlog, deleteBlog }
